@@ -89,6 +89,6 @@ if __name__ == "__main__":
 	arch_loc = sys.argv[3]
 	
 	make_dir(end_loc)
-	#traverse_dir(orig_loc, ext)
+	traverse_dir(orig_loc, ext)
 	make_tarfile(arch_loc, end_loc)
 	
