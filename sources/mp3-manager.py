@@ -17,7 +17,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>. """
 
-
+import binascii
 import shutil
 import os
 import sys
@@ -31,6 +31,12 @@ def make_tarfile(output_filename, source_dir):
         tar.add(source_dir, arcname=os.path.basename(source_dir))
     print "Creating ARCHIVE in: %s%s", str(archname), str(source_dir) 
 
+def get_hash(filename):
+    with open(filename, "rb") as f:
+        data = f.read()
+        data = binascii.hexlify(data)
+        h =  hashlib.sha256(data).hexdigest()
+    return h
 
 def make_dir(path):
     try:
@@ -52,10 +58,14 @@ def traverse_dir(orig_loc, ext):
 			if tmp_ext == ext:
 			#check for duplicates
 				m_path = os.path.realpath(os.path.join(root,mp3))
-				with open(m_path, "rb") as f:
-					data = f.read()
-					h = hashlib.sha256(data)
-					if h not in music_hashes:
+                    
+                h = get_hash(m_path)
+                    
+                    #with open(m_path, "rb") as f:
+					#data = f.read()
+                    #h =  hashlib.sha256(data).hexdigest()
+
+                    if h not in music_hashes:
 						shutil.copy(m_path, end_loc)
 						music_hashes.append(h)
 						print "adding %s to music list" % str(mp3)
@@ -71,11 +81,11 @@ if __name__ == "__main__":
 
     usage = "[Source Folder] [Destination Folder] [Archive Name] ([file extension])"
     
-    if len(sys.argv) < 3 or len(sys.argv) > 4:
+    if len(sys.argv) < 4 or len(sys.argv) > 5:
         print usage
         sys.exit()
     
-    elif len(sys.argv) == 4:
+    elif len(sys.argv) == 5:
         
         ext = sys.argv[4] # default .mp3
     else:
