@@ -59,18 +59,18 @@ def traverse_dir(orig_loc, ext):
 			#check for duplicates
 				m_path = os.path.realpath(os.path.join(root,mp3))
                     
-                h = get_hash(m_path)
+                		h = get_hash(m_path)
                     
-                    #with open(m_path, "rb") as f:
+                    		#with open(m_path, "rb") as f:
 					#data = f.read()
-                    #h =  hashlib.sha256(data).hexdigest()
+                    			#h =  hashlib.sha256(data).hexdigest()
 
-                    if h not in music_hashes:
-						shutil.copy(m_path, end_loc)
-						music_hashes.append(h)
-						print "adding %s to music list" % str(mp3)
-					else:
-						print "DUPLICATE FILE %s NOT ADDED." % str(mp3)
+                    		if h not in music_hashes:
+					shutil.copy(m_path, end_loc)
+					music_hashes.append(h)
+					print "adding %s to music list" % str(mp3)
+				else:
+					print "DUPLICATE FILE %s NOT ADDED." % str(mp3)
 			else:
 				print "NOT ADDING file %s with extension: "%str(mp3), tmp_ext
 	
