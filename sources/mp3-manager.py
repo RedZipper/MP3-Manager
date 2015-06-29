@@ -76,7 +76,6 @@ def traverse_dir(orig_loc, ext):
 
         print "added %d files to Directry"% len(music_hashes)
 
-
 if __name__ == "__main__":
     
     usage = "[Source Folder] [Destination Folder] [Archive Name] ([file extension])"
