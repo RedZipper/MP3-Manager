@@ -25,11 +25,21 @@ import hashlib
 import errno
 import tarfile
 
+from subprocess import call
+
 #http://stackoverflow.com/questions/2032403/how-to-create-full-compressed-tar-file-using-python
 def make_tarfile(output_filename, source_dir):
     with tarfile.open(output_filename, "w:gz") as tar:
         tar.add(source_dir, arcname=os.path.basename(source_dir))
     print "Creating ARCHIVE in: %s%s", str(archname), str(source_dir)
+
+def make_archive(archive_name, source_dir):
+    try:
+        call(["7z", "a", "-t7z", archive_name, source_dir, "-mx9"])
+    except:
+        print "error when attempting to make archive."
+        print "Is p7zip installed?"
+        sys.exit()
 
 def get_hash(filename):
     with open(filename, "rb") as f:
@@ -49,14 +59,14 @@ def make_dir(path):
 def copy_file(hash, hash_list, dir_from, dir_to, mp3):
     if hash not in hash_list:
         shutil.copy(dir_from, dir_to)
-        music_hashes.append(hash)
+        hash_list.append(hash)
         print "adding %s to music list" % str(mp3)
         return True
     else:
         print "Duplicate file %s not added." %str(mp3)
         return False
 
-#traverse    directories adding mp3's to new folder
+#traverse  directories adding mp3's to new folder
 #hash the files and add hash to list
 #only add the files with given extension (example .mp3)
 def traverse_dir(orig_loc, ext):
@@ -73,8 +83,7 @@ def traverse_dir(orig_loc, ext):
             
             else:
                 print "NOT ADDING file %s with extension: "%str(mp3), tmp_ext
-
-        print "added %d files to Directry"% len(music_hashes)
+    print "added %d files to Directry"% len(music_hashes)
 
 if __name__ == "__main__":
     
@@ -99,7 +108,8 @@ if __name__ == "__main__":
 
     if os.path.isdir(orig_loc):
         traverse_dir(orig_loc, ext)
-        make_tarfile(arch_loc, end_loc)
+        #make_tarfile(arch_loc, end_loc)
+        make_archive(arch_loc, end_loc)
     else:
         print "Error, Source Drectory does not exist. Exiting . . ."
         sys.exit()
