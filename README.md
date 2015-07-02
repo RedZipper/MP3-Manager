@@ -6,13 +6,17 @@
 * This script works with any type of file, but I designed it to find my MP3s.  If you desire, you can give the script a different extension, like .txt, .jpeg, .jpg, .png, etc, as the 5th commandline argument. If you run the script without the 5th commandline argument it defaults to .mp3.
 
 * To run it execute the following from the command line:
-  $ python mp3-manager.py [Source Folder] [Destination Folder] [Archive Name] ([file extension])
+  
+$ python mp3-manager.py [Source Folder] [Destination Folder] [Archive Name] ([file extension])
 
 * For example:
-  $ python mp3-manager.py  /home/users/Music /home/users/NewFolder myArchive.7z .mp3
+  
+$ python mp3-manager.py  /home/users/Music /home/users/NewFolder myArchive.7z .mp3
 
-* OR
-  $ python mp3-manager.py  /home/users/Music /home/users/NewFolder myArchive.7z 
+* OR:
+  
+$ python mp3-manager.py  /home/users/Music /home/users/NewFolder myArchive.7z 
 
-* OR
-  $ python mp3-manager.py  /home/users/files /home/users/NewFolder myArchive.7z .txt 
+* OR:
+  
+$ python mp3-manager.py  /home/users/files /home/users/NewFolder myArchive.7z .txt 
