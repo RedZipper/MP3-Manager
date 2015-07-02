@@ -7,7 +7,7 @@
 
 * To run it execute the following from the command line:
   
-$ python mp3-manager.py [Source Folder] [Destination Folder] [Archive Name] ([file extension])
+$ python mp3-manager.py [Source Folder] [Destination Folder] [Archive Name] (\[file extension]\)
 
 * For example:
   
